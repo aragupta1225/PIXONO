@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pixono – Your cute aesthetic world of creativity and fun.">
+    <title>PIXONO ✿ Welcome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@400;600;700&family=Pacifico&family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <!-- Sound Controls -->
+    <div class="sound-control-container" id="soundControlContainer">
+        <button class="sound-toggle" id="soundToggle" aria-label="Toggle Sound">
+            <span class="icon" id="soundIcon">🔊</span>
+        </button>
+        <div class="volume-slider-wrapper">
+            <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider" aria-label="Volume">
+        </div>
+    </div>
+
+    <!-- Background Layer -->
+    <div class="bg-layer"></div>
+
+    <!-- Soft Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Floating Stickers Container -->
+    <div class="stickers-container" id="stickersContainer"></div>
+
+
+    <!-- Horizontal Scrolling Main Content -->
+    <main class="scroll-container" id="scrollContainer">
+        <!-- Section 1: Intro (Landing) -->
+        <section class="scroll-section" id="sectionIntro">
+            <div class="intro-content">
+                <h1 class="hero-logo">
+                    <span>P</span><span>I</span><span>X</span><span>O</span><span>N</span><span>O</span>
+                </h1>
+                <p class="hero-subText">ﾟ &nbsp; ♡ &nbsp; * &nbsp; 。 &nbsp; ﾟ &nbsp; your cute creative world &nbsp; ﾟ &nbsp; 。 &nbsp; * &nbsp; ♡ &nbsp; ﾟ</p>
+                <button class="start-btn" id="introStartBtn">
+                    ♡ START ♡
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 2: Choose your Diary -->
+        <section class="scroll-section" id="sectionChoose">
+            <button class="tool-btn secondary back-corner-btn" id="chooseBackBtn">← Back</button>
+            <h2 class="section-heading">Choose your diary</h2>
+            <p class="section-sub">Pick a style that matches your mood ✿</p>
+            
+            <div class="diary-grid">
+                <div class="diary-card" data-style="pastel" onclick="window._pixonoChooseDiary('pastel')">
+                    <div class="diary-cover cover-pastel">
+                        <div class="diary-label">Pastel</div>
+                    </div>
+                </div>
+                <div class="diary-card" data-style="floral" onclick="window._pixonoChooseDiary('floral')">
+                    <div class="diary-cover cover-floral">
+                        <div class="diary-label">Floral</div>
+                    </div>
+                </div>
+                <div class="diary-card" data-style="minimal" onclick="window._pixonoChooseDiary('minimal')">
+                    <div class="diary-cover cover-minimal">
+                        <div class="diary-label">Minimal</div>
+                    </div>
+                </div>
+                <div class="diary-card" data-style="kawaii" onclick="window._pixonoChooseDiary('kawaii')">
+                    <div class="diary-cover cover-kawaii">
+                        <div class="diary-label">Kawaii</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Diary Viewer -->
+        <section class="scroll-section" id="sectionViewer">
+            <div class="viewer-container">
+                <!-- Top Toolbar -->
+                <div class="viewer-toolbar">
+                    <button class="tool-btn active" id="modeWrite">✏️ Write</button>
+                    <button class="tool-btn" id="modeDecorate">🎀 Decorate</button>
+                    <div class="toolbar-divider"></div>
+                    <button class="tool-btn icon-only" id="undoBtn" title="Undo">↩️</button>
+                    <button class="tool-btn icon-only" id="redoBtn" title="Redo">↪️</button>
+                    <button class="tool-btn icon-only" id="resetBtn" title="Reset Page">🗑️</button>
+                    <div class="toolbar-divider"></div>
+                    <button class="tool-btn" id="saveDiaryBtn">✨ Save</button>
+                    <select class="tool-btn font-selector" id="fontSelector" title="Change Font">
+                        <option value="'Quicksand', sans-serif">Quicksand</option>
+                        <option value="'Indie Flower', cursive">Indie Flower</option>
+                        <option value="'Caveat', cursive">Caveat</option>
+                        <option value="'Dancing Script', cursive">Dancing Script</option>
+                        <option value="'Pacifico', cursive">Pacifico</option>
+                    </select>
+                    <button class="tool-btn" id="viewerBackBtn">↺ Back</button>
+                </div>
+
+                <!-- Page Controls -->
+                <div class="page-controls small-cute">
+                    <button class="page-nav-btn" id="prevPageBtn">←</button>
+                    <span class="page-indicator" id="pageIndicator">1</span>
+                    <button class="page-nav-btn" id="nextPageBtn">→</button>
+                </div>
+
+                <!-- The Book -->
+                <div class="book-container">
+                    <!-- Draggable Stickers Area (Full overlay) -->
+                    <div class="sticker-area" id="stickerArea"></div>
+                    
+                    <div class="book-layout" id="diaryBook">
+                        <div class="book-page left-page">
+                            <textarea class="page-content lined" id="leftPageText" placeholder="Once upon a time..."></textarea>
+                        </div>
+                        <div class="book-spine"></div>
+                        <div class="book-page right-page">
+                            <textarea class="page-content lined" id="rightPageText" placeholder="Dear diary..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sticker Panel (Hidden by default) -->
+                <div class="sticker-sidebar hidden" id="stickerSidebar">
+                    <h3 class="sidebar-title">Stickers</h3>
+                    
+                    <!-- Categories -->
+                    <div class="sticker-tabs" id="stickerTabs">
+                        <button class="tab-btn active" data-tab="Flowers">Flowers</button>
+                        <button class="tab-btn" data-tab="Stamps">Stamps</button>
+                        <button class="tab-btn" data-tab="Washi Tapes">Washi</button>
+                        <button class="tab-btn" data-tab="Bows">Bows</button>
+                        <button class="tab-btn" data-tab="Misc">Misc</button>
+                    </div>
+
+                    <!-- Dynamic Sticker Grid -->
+                    <div class="sticker-options" id="stickerGrid">
+                        <!-- Populated via script.js -->
+                        <p style="font-size:0.8rem; color:#888; text-align:center; padding: 20px 0;">Stickers loading...</p>
+                    </div>
+                    
+                    <!-- Separate action for Custom Photos -->
+                    <div class="custom-photo-section">
+                        <button class="sticker-opt photo-upload-btn" title="Add Photo" id="photoUploadBtn">📷 Add Photo</button>
+                        <input type="file" id="photoUploadInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <script src="assets/stickers_manifest.js?version=latest"></script>
+    <script src="script2.js"></script>
+</body>
+</html>
